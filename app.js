@@ -1072,7 +1072,7 @@ annuity ${usd(g.firstYearAnnuityUsd)}/yr · ${STATUS_LABEL[g.status]}${g.status 
       <text x="${L}" y="25" fill="var(--muted)" opacity="0.75" font-size="9" font-family="var(--mono)">twelve years · 10th–90th percentile of 300 simulated paths per scenario · median marked</text>`;
     // $5M reference: seed merely returned
     out += `<line x1="${x(5)}" x2="${x(5)}" y1="${T}" y2="${HH - 40}" stroke="var(--text)" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
-      <text x="${x(5)}" y="${HH - 12}" fill="var(--muted)" font-size="9.5" text-anchor="middle" font-family="var(--mono)">↑ $5M seed returned</text>`;
+      <text x="${x(5)}" y="${HH - 12}" fill="var(--muted)" font-size="9.5" text-anchor="middle" font-family="var(--mono)">↑ $5M seed</text>`;
     for (let g = 10; g <= XMAX; g += 10) {
       out += `<line x1="${x(g)}" x2="${x(g)}" y1="${T}" y2="${HH - 40}" stroke="var(--line)" stroke-width="0.5" opacity="0.5"/>
         <text x="${x(g)}" y="${HH - 26}" fill="var(--muted)" font-size="9.5" text-anchor="middle" font-family="var(--mono)">$${g}M</text>`;
