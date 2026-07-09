@@ -43,6 +43,24 @@ jobs:
             git push
           fi
 
+      # The IRS resets the 7520 rate monthly; the table in model.js is manual.
+      # File an issue (once) whenever the current month is missing.
+      - name: Check 7520 rate table freshness
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          month=$(date -u +%Y-%m)
+          if ! grep -q "\"$month\"" model.js; then
+            existing=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+              --search "7520 rate table in:title" --json number --jq '.[0].number')
+            if [ -z "$existing" ]; then
+              gh issue create --repo "$GITHUB_REPOSITORY" \
+                --title "7520 rate table needs $month" \
+                --body "model.js SEC7520_RATES has no entry for $month. Get the new rate from https://www.irs.gov/businesses/small-businesses-self-employed/section-7520-interest-rates and add it — and if the rate changed, update the number in the article headline and opening paragraph of index.html."
+            fi
+          fi
+
       # If the refresh fails, file (or bump) a GitHub issue so the failure is
       # loud. Without this, failure emails are easy to miss and GitHub disables
       # the cron entirely after 60 days without repo activity.

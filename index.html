@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Hurdle Is 4.6 Percent. The Asset Is Bitcoin. — Rolling Bitcoin GRATs</title>
+<title>The Hurdle Is 5.2 Percent. The Asset Is Bitcoin. — Rolling Bitcoin GRATs</title>
 <meta name="description" content="Rolling zeroed-out GRATs funded with Bitcoin: the legal architecture, the rolling chain, and an interactive simulator over sixteen years of real market data. By Benjamin Ross Sternfeld.">
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>&#8383;</text></svg>">
@@ -13,7 +13,7 @@
 <nav>
   <a class="brand" href="#top"><b>&#8383;</b> Rolling Bitcoin GRATs <span style="color:var(--muted)">&middot; B. Sternfeld</span></a>
   <span class="links">
-    <a href="#the-hurdle-is-4-6-percent">Article</a>
+    <a href="#the-hurdle">Article</a>
     <a href="#simulator">Simulator</a>
     <a href="#methodology">Methodology</a>
     <a href="#author">Author</a>
@@ -24,11 +24,11 @@
 
 <!-- ============================== ARTICLE ============================== -->
 
-<section class="prose" id="the-hurdle-is-4-6-percent">
+<section class="prose" id="the-hurdle">
   <p style="border:1px solid var(--line,#444); border-left:3px solid var(--muted,#888); border-radius:4px; padding:.6em .9em; font-size:.85em; color:var(--muted,#888); margin-bottom:1.5em;"><b>Data note:</b> Everything on this page &mdash; prices, on-chain metrics, and simulator results &mdash; runs on a market-data snapshot refreshed automatically each day. The data shown runs through <b id="data-note-date">July 7, 2026</b> (last BTC close: <span id="data-note-price">$63,289</span>). Figures do not reflect intraday moves or &sect;7520 rate changes after that date.</p>
-  <h1>The Hurdle Is 4.6 Percent. The Asset Is Bitcoin.</h1>
+  <h1>The Hurdle Is 5.2 Percent. The Asset Is Bitcoin.</h1>
   <p class="standfirst">How a chain of rolling, zeroed-out GRATs converts Bitcoin's violent drawdowns into systematic, gift-tax-free transfers &mdash; compounding appreciation out of the taxable estate two years at a time.</p>
-  <p>The federal wealth-transfer system prices every gift against one number: the &sect;7520 rate &mdash; 4.6% as of April 2026, reset monthly by the IRS (the simulator below always uses the actual rate for each funding month). Whatever a properly built trust earns above that hurdle during its term passes to the next generation free of gift and estate tax. Bitcoin has cleared that hurdle in nearly every two-year window of its existence &mdash; and in the windows where it has not, the structure described below loses nothing. No gift. No exemption consumed. The coins simply come home and try again at a lower price.</p>
+  <p>The federal wealth-transfer system prices every gift against one number: the &sect;7520 rate &mdash; 5.2% as of July 2026, reset monthly by the IRS (the simulator below always uses the actual rate for each funding month). Whatever a properly built trust earns above that hurdle during its term passes to the next generation free of gift and estate tax. Bitcoin has cleared that hurdle in nearly every two-year window of its existence &mdash; and in the windows where it has not, the structure described below loses nothing. No gift. No exemption consumed. The coins simply come home and try again at a lower price.</p>
   <p>That asymmetry is the whole argument. The rest of this article is the machinery.</p>
 </section>
 
@@ -49,7 +49,7 @@
 <section class="prose" id="the-engine-rolling-the-chain">
   <h2>The Engine: Rolling the Chain</h2>
   <p>A rolling GRAT is a series of short-term zeroed-out GRATs run as a continuous chain. Each annuity payment the grantor receives &mdash; in kind, in Bitcoin &mdash; is immediately re-contributed to a new two-year GRAT, zeroed out at <em>that day's</em> price and <em>that month's</em> &sect;7520 rate. Because each GRAT is a grantor trust, transfers between the grantor and the trust are non-recognition events under Rev. Rul. 85-13: the coins move in and out with no taxable sale, and basis carries over.</p>
-  <p>Now consider what failure means inside the chain. If Bitcoin falls during a term, the trust's assets are consumed by the annuity and return to the grantor. Nothing transferred &mdash; and nothing was spent. The grantor re-funds the next GRAT at the depressed price, which resets the hurdle from the new, lower base. When the asset recovers, the successor GRAT captures the entire recovery above 4.6% as a tax-free remainder. The drawdown did not break the strategy; it repositioned it.</p>
+  <p>Now consider what failure means inside the chain. If Bitcoin falls during a term, the trust's assets are consumed by the annuity and return to the grantor. Nothing transferred &mdash; and nothing was spent. The grantor re-funds the next GRAT at the depressed price, which resets the hurdle from the new, lower base. When the asset recovers, the successor GRAT captures the entire recovery above the &sect;7520 hurdle as a tax-free remainder. The drawdown did not break the strategy; it repositioned it.</p>
   <blockquote class="pull">Every crash is a re-entry point for the next GRAT in the chain.</blockquote>
   <p>Successful remainders distribute in kind to an irrevocable children's trust, where they compound outside the grantor's estate &mdash; while the grantor, taxed personally on all trust income under the grantor trust rules, keeps depleting the taxable estate with every tax payment (a benefit the IRS itself confirmed is not a gift, Rev. Rul. 2004-64). Contrast the installment sale to a defective grantor trust: there the note is fixed at the original price, a crash leaves the trust underwater, and no reset mechanism exists. The rolling GRAT cannot fail catastrophically. It can only fail gracefully, and graceful failure is a re-entry.</p>
   <figure class="livefig" id="motion-figure">
@@ -90,7 +90,7 @@
       <tr><td>2023&ndash;2025</td><td>$15,500 &rarr; $100,000+ (&gt;6x)</td><td>New GRAT captures the recovery, tax-free</td></tr>
     </tbody>
   </table>
-  <p>Inside the zeroed-out wrapper, this pattern is structurally asymmetric. On a two-year GRAT at 4.6%, the cumulative hurdle is roughly 9.4%. Bitcoin has exceeded that in the overwhelming majority of two-year windows in its history; the exceptions are windows seeded near the cycle peaks &mdash; and those are precisely the entries the next GRAT in the chain re-prices at the bottom.</p>
+  <p>Inside the zeroed-out wrapper, this pattern is structurally asymmetric. On a two-year GRAT at 5.2%, the cumulative hurdle is roughly 10.7%. Bitcoin has exceeded that in the overwhelming majority of two-year windows in its history; the exceptions are windows seeded near the cycle peaks &mdash; and those are precisely the entries the next GRAT in the chain re-prices at the bottom.</p>
   <figure class="livefig" id="hurdle-figure">
     <div class="livefig-stat" id="hurdle-stat">computing&hellip;</div>
     <div class="chart" id="hurdle-strip"></div>
@@ -109,7 +109,7 @@
 
 <section class="prose" id="one-grat-by-the-numbers">
   <h2>One GRAT, by the Numbers</h2>
-  <p>Assume a client funds GRAT No. 1 with $5 million of Bitcoin &mdash; 100 BTC at $50,000 &mdash; during a post-cycle correction. Zeroed out at the 4.6% &sect;7520 rate over a two-year term, the grantor must receive back approximately $2.65 million in each of two years (with a modest adjustment available under the 20% escalation rule, Treas. Reg. &sect;25.2702-3(b)(1)(ii)). The taxable gift is zero.</p>
+  <p>Assume a client funds GRAT No. 1 with $5 million of Bitcoin &mdash; 100 BTC at $50,000 &mdash; during a post-cycle correction. Zeroed out at a hypothetical 4.6% &sect;7520 rate over a two-year term, the grantor must receive back approximately $2.65 million in each of two years (with a modest adjustment available under the 20% escalation rule, Treas. Reg. &sect;25.2702-3(b)(1)(ii)). The taxable gift is zero.</p>
   <table>
     <thead>
       <tr><th>Year</th><th>BTC price</th><th>GRAT value</th><th>Annuity paid</th><th>Action</th></tr>
