@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Hurdle Is 4.6 Percent. The Asset Is Bitcoin. — Rolling Bitcoin GRATs</title>
+<meta name="description" content="Rolling zeroed-out GRATs funded with Bitcoin: the legal architecture, the rolling chain, and an interactive simulator over sixteen years of real market data. By Benjamin Ross Sternfeld.">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>&#8383;</text></svg>">
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="#top"><b>&#8383;</b> Rolling Bitcoin GRATs <span style="color:var(--muted)">&middot; B.&thinsp;R. Sternfeld</span></a>
+  <span class="links">
+    <a href="#the-hurdle-is-4-6-percent">Article</a>
+    <a href="#simulator">Simulator</a>
+    <a href="#methodology">Methodology</a>
+    <a href="#author">Author</a>
+  </span>
+</nav>
+
+<a id="top"></a>
+
+<!-- ============================== ARTICLE ============================== -->
+
+<section class="prose" id="the-hurdle-is-4-6-percent">
+  <h1>The Hurdle Is 4.6 Percent. The Asset Is Bitcoin.</h1>
+  <p class="standfirst">How a chain of rolling, zeroed-out GRATs converts Bitcoin's violent drawdowns into systematic, gift-tax-free transfers &mdash; compounding appreciation out of the taxable estate two years at a time.</p>
+  <p>The federal wealth-transfer system prices every gift against one number: the &sect;7520 rate &mdash; 4.6% as of April 2026, reset monthly by the IRS (the simulator below always uses the actual rate for each funding month). Whatever a properly built trust earns above that hurdle during its term passes to the next generation free of gift and estate tax. Bitcoin has cleared that hurdle in nearly every two-year window of its existence &mdash; and in the windows where it has not, the structure described below loses nothing. No gift. No exemption consumed. The coins simply come home and try again at a lower price.</p>
+  <p>That asymmetry is the whole argument. The rest of this article is the machinery.</p>
+</section>
+
+<section class="prose" id="the-problem-conventional-planning-gets-wrong">
+  <h2>The Problem Conventional Planning Gets Wrong</h2>
+  <p>The client this strategy serves already exists in large numbers: the long-term holder with a low-basis position now worth millions. Selling triggers a punishing capital gains bill. Holding until death earns the heirs a basis step-up under I.R.C. &sect;1014 &mdash; solving the income tax problem &mdash; but leaves the entire appreciated position inside the gross estate, exposed to a 40% federal estate tax above the exemption (roughly $13.99 million per person in 2025, set at $15 million for 2026 by the 2025 tax legislation). The holder is locked in both directions.</p>
+  <p>Bitcoin compounds the difficulty because it is a bearer asset. Whoever controls the private keys controls the property. A balance on an exchange is not Bitcoin; it is a contractual claim against a custodian, and that claim behaves badly at exactly the moments estate planning exists for &mdash; platforms freeze accounts at notice of death, generally will not retitle accounts to a trust, and reserve the right to restrict access in their terms of service.</p>
+  <p>Conventional planners mishandle this asset in two predictable ways. Some treat the volatility as disqualifying and steer the client away entirely. Others accept the asset but wrap it &mdash; in a custodial account or a spot ETF &mdash; severing the client from the property itself. Both responses miss the central point: inside the right structure, the volatility is not the obstacle. It is the input.</p>
+</section>
+
+<section class="prose" id="the-instrument-a-zeroed-out-two-year-grat">
+  <h2>The Instrument: A Zeroed-Out Two-Year GRAT</h2>
+  <p>A grantor retained annuity trust is an irrevocable trust into which the grantor transfers assets while retaining a fixed annuity for a set term. Under I.R.C. &sect;2702(b), that retained annuity is a qualified interest, and its present value &mdash; discounted at the &sect;7520 rate &mdash; is subtracted from the transfer when computing the taxable gift. Following <em>Walton v. C.I.R.</em>, 115 T.C. 589 (2000), and the IRS's acquiescence in Notice 2003-72, the annuity can be set high enough that the computed gift is zero. This is the zeroed-out, or <em>Walton</em>, GRAT.</p>
+  <p>The deal it strikes is simple. If the trust assets outperform the &sect;7520 rate over the term, everything above the hurdle passes to the remainder beneficiaries free of gift and estate tax. If they underperform, the annuity simply returns the principal to the grantor &mdash; no transfer occurs, but also no loss: no gift was made and no lifetime exemption was used.</p>
+  <p>The mechanics that matter are in the regulations. The annuity must actually be paid, annually, from income or principal (Treas. Reg. &sect;25.2702-3(b)(1)); the trust cannot satisfy it with a note (Treas. Reg. &sect;25.2702-3(d)(6)(i)); and payments may escalate up to 20% per year (Treas. Reg. &sect;25.2702-3(b)(1)(ii)). Those rules are why long-term GRATs punish volatile assets: in a year when the asset falls 60% &mdash; as Bitcoin did in 2014, 2018, and 2022 &mdash; the trustee must still pay the fixed annuity, liquidating corpus at the bottom. A two-year term confines each bet to a discrete window and never asks the trust to survive a full cycle.</p>
+</section>
+
+<section class="prose" id="the-engine-rolling-the-chain">
+  <h2>The Engine: Rolling the Chain</h2>
+  <p>A rolling GRAT is a series of short-term zeroed-out GRATs run as a continuous chain. Each annuity payment the grantor receives &mdash; in kind, in Bitcoin &mdash; is immediately re-contributed to a new two-year GRAT, zeroed out at <em>that day's</em> price and <em>that month's</em> &sect;7520 rate. Because each GRAT is a grantor trust, transfers between the grantor and the trust are non-recognition events under Rev. Rul. 85-13: the coins move in and out with no taxable sale, and basis carries over.</p>
+  <p>Now consider what failure means inside the chain. If Bitcoin falls during a term, the trust's assets are consumed by the annuity and return to the grantor. Nothing transferred &mdash; and nothing was spent. The grantor re-funds the next GRAT at the depressed price, which resets the hurdle from the new, lower base. When the asset recovers, the successor GRAT captures the entire recovery above 4.6% as a tax-free remainder. The drawdown did not break the strategy; it repositioned it.</p>
+  <blockquote class="pull">Every crash is a re-entry point for the next GRAT in the chain.</blockquote>
+  <p>Successful remainders distribute in kind to an irrevocable children's trust, where they compound outside the grantor's estate &mdash; while the grantor, taxed personally on all trust income under the grantor trust rules, keeps depleting the taxable estate with every tax payment (a benefit the IRS itself confirmed is not a gift, Rev. Rul. 2004-64). Contrast the installment sale to a defective grantor trust: there the note is fixed at the original price, a crash leaves the trust underwater, and no reset mechanism exists. The rolling GRAT cannot fail catastrophically. It can only fail gracefully, and graceful failure is a re-entry.</p>
+  <figure class="livefig" id="motion-figure">
+    <div class="motion-controls">
+      <button class="morebtn" id="motion-play" style="margin-top:0">&#9654; Play</button>
+      <span class="seg" id="motion-speed" style="max-width:170px">
+        <button data-s="1" class="on">1&times;</button>
+        <button data-s="2">2&times;</button>
+        <button data-s="4">4&times;</button>
+      </span>
+      <input type="range" id="motion-scrub" min="0" max="1000" value="0" style="flex:1;accent-color:var(--accent)">
+      <span class="readout" id="motion-date" style="font-family:var(--mono);font-size:0.85rem"></span>
+    </div>
+    <div class="sweep-status" id="motion-live" style="margin:0.3rem 0 0.5rem"></div>
+    <div class="chart" id="motion-chart"></div>
+    <figcaption><span id="motion-summary"></span> Each new bar is a new derivation path from the same
+    seed &mdash; <span style="font-family:var(--mono)">m/48'/0'/n'</span> flashes at funding &mdash;
+    spawned by its parent's annuity payment. Bars turn <span style="color:var(--green)">green</span>
+    when the term ends and the remainder flows to the children's trust,
+    <span style="color:var(--red)">red</span> when a trust exhausts gracefully and its corpus
+    re-seeds the next link. Hover any bar for its full record.</figcaption>
+  </figure>
+</section>
+
+<section class="prose" id="why-bitcoin-volatility-as-the-feature">
+  <h2>Why Bitcoin: Volatility as the Feature</h2>
+  <p>The textbook GRAT asset is a pre-IPO interest or property approaching a known liquidity event &mdash; concentrated, predictable, and non-repeating. Once the company goes public, there is nothing to roll into. Bitcoin is the opposite case: its supply issuance halves on a four-year schedule embedded in the protocol, and every cycle to date has produced both a deep drawdown and a recovery that dwarfs any plausible &sect;7520 hurdle.</p>
+  <table>
+    <thead>
+      <tr><th>Period</th><th>Bitcoin price action</th><th>Rolling-GRAT effect</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>2014&ndash;2015</td><td>~85% drawdown ($1,100 &rarr; $170)</td><td>Principal returned; re-fund at $170</td></tr>
+      <tr><td>2015&ndash;2017</td><td>$170 &rarr; $19,000 (&gt;100x)</td><td>New GRAT captures the gain above the hurdle, tax-free</td></tr>
+      <tr><td>2018</td><td>~84% drawdown ($19,000 &rarr; $3,200)</td><td>Principal returned; re-fund at $3,200</td></tr>
+      <tr><td>2019&ndash;2021</td><td>$3,200 &rarr; $69,000 (&gt;20x)</td><td>New GRAT captures the recovery, tax-free</td></tr>
+      <tr><td>2022</td><td>~77% drawdown ($69,000 &rarr; $15,500)</td><td>Principal returned; re-fund at $15,500</td></tr>
+      <tr><td>2023&ndash;2025</td><td>$15,500 &rarr; $100,000+ (&gt;6x)</td><td>New GRAT captures the recovery, tax-free</td></tr>
+    </tbody>
+  </table>
+  <p>Inside the zeroed-out wrapper, this pattern is structurally asymmetric. On a two-year GRAT at 4.6%, the cumulative hurdle is roughly 9.4%. Bitcoin has exceeded that in the overwhelming majority of two-year windows in its history; the exceptions are windows seeded near the cycle peaks &mdash; and those are precisely the entries the next GRAT in the chain re-prices at the bottom.</p>
+  <figure class="livefig" id="hurdle-figure">
+    <div class="livefig-stat" id="hurdle-stat">computing&hellip;</div>
+    <div class="chart" id="hurdle-strip"></div>
+    <div class="chips" id="hurdle-eras"></div>
+    <figcaption>Every two-year window, colored by whether Bitcoin's actual move beat that funding
+    month's actual &sect;7520 rate compounded over two years &mdash; computed live from the snapshot;
+    this figure is the sentence above, checked. It defaults to the <strong>halving era
+    (Nov&nbsp;2012&nbsp;&rarr;)</strong>: the cycle regime this strategy harvests begins at the first
+    halving, and rigorous Bitcoin research typically excludes pre-2013 data anyway &mdash; thin,
+    unreliable early-exchange markets that could not have absorbed the position sizes modeled here.
+    The buttons switch eras honestly in both directions. <strong>Click a red span</strong> to seed the
+    simulator inside a losing window and watch the chain re-enter at the bottom.</figcaption>
+  </figure>
+  <blockquote class="pull">The downside is a refund of principal. The upside is uncapped &mdash; and it leaves the estate.</blockquote>
+</section>
+
+<section class="prose" id="one-grat-by-the-numbers">
+  <h2>One GRAT, by the Numbers</h2>
+  <p>Assume a client funds GRAT No. 1 with $5 million of Bitcoin &mdash; 100 BTC at $50,000 &mdash; during a post-cycle correction. Zeroed out at the 4.6% &sect;7520 rate over a two-year term, the grantor must receive back approximately $2.65 million in each of two years (with a modest adjustment available under the 20% escalation rule, Treas. Reg. &sect;25.2702-3(b)(1)(ii)). The taxable gift is zero.</p>
+  <table>
+    <thead>
+      <tr><th>Year</th><th>BTC price</th><th>GRAT value</th><th>Annuity paid</th><th>Action</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Year 0</td><td>$50,000</td><td>$5.0M (100 BTC)</td><td>&mdash;</td><td>Fund GRAT No. 1</td></tr>
+      <tr><td>Year 1</td><td>$65,000</td><td>$6.5M</td><td>$2.65M (~40.8 BTC)</td><td>Annuity paid in kind; the 40.8 BTC re-fund GRAT No. 2</td></tr>
+      <tr><td>Year 2</td><td>$90,000</td><td>~$5.3M</td><td>$2.65M (~29.4 BTC)</td><td>Final annuity; the 29.4 BTC re-fund GRAT No. 3</td></tr>
+      <tr><td>Remainder</td><td>$90,000</td><td>~29.8 BTC &times; $90K = $2.68M</td><td>&mdash;</td><td>Passes gift- and estate-tax-free to the children's trust</td></tr>
+    </tbody>
+  </table>
+  <p>One trust, one cycle leg, roughly $2.68 million moved out of the estate with zero gift tax and zero exemption used &mdash; while every coin paid back to the grantor is already at work in the next link of the chain.</p>
+  <p>Now run the failure case. GRAT No. 2 holds 40.8 BTC funded at $65,000 ($2.65 million), and Bitcoin falls to $30,000 mid-term. The trust is worth $1.22 million &mdash; less than the remaining annuity obligation &mdash; so it pays everything back to the grantor and terminates. No remainder, no gift, no tax consequence of any kind. The grantor re-funds at the $30,000 valuation, and when the price recovers to $80,000, the successor GRAT captures a 167% move above a hurdle that was set at the bottom. The crash amplified the strategy.</p>
+</section>
+
+<section class="prose" id="operational-reality-keys-vaults-and-the-105-day-lever">
+  <h2>Operational Reality: Keys, Vaults, and the 105-Day Lever</h2>
+  <h3>In-kind annuities and the grace window</h3>
+  <p>Every payment in the chain should move in Bitcoin, not dollars. An in-kind annuity is valued at fair market value on the date of distribution, triggers no recognition under Rev. Rul. 85-13, and never forces the trustee to sell into a drawdown. Consistent use of a recognized pricing source &mdash; for example, the CME CF Bitcoin Reference Rate at a fixed daily time &mdash; keeps each valuation defensible.</p>
+  <p>The regulations then hand the trustee a free option most planners never use: Treas. Reg. &sect;25.2702-3(b)(4) permits each annuity payment to be made up to 105 days after its due date. Within that window, paying on a local price high means fewer coins leave the trust to satisfy the fixed dollar obligation. In historical backtests this single lever &mdash; no structural change, no cost &mdash; improved aggregate transfers across a rolling chain by roughly 11%.</p>
+  <h3>One seed, thirty vaults</h3>
+  <p>Each GRAT in the chain is a separate irrevocable trust and needs its own titled custody: a multisignature vault owned by that GRAT (&ldquo;2026 GRAT No.&nbsp;1 Vault&rdquo;), typically a 2-of-3 quorum split among the trustee, an independent co-signer, and a collaborative custody provider that holds one key but can never move funds unilaterally. Funding, each annuity, and the remainder distribution are all on-chain transactions &mdash; publicly timestamped, with the transaction ID serving as a transfer record more auditable than any brokerage letter.</p>
+  <p>The obvious objection &mdash; that a thirty-GRAT chain implies an unmanageable drawer of hardware &mdash; misunderstands how Bitcoin keys work. Under BIP-32 hierarchical deterministic derivation, a single seed produces an effectively unlimited tree of cryptographically independent child keys, one derivation path per GRAT. Thirty vaults require three hardware devices &mdash; one per signer &mdash; plus a descriptor registry mapping each trust to its path and quorum. A compromised key at one path does not propagate to the others, and a replacement device initialized from the same seed reproduces every vault.</p>
+  <figure class="livefig" id="vault-figure">
+    <svg viewBox="0 0 680 318" role="img" aria-label="Three signers, one derivation tree, many vaults" font-family="var(--mono)">
+      <!-- signer devices (left column) -->
+      <text x="14" y="24" fill="var(--muted)" font-size="11" font-family="var(--sans)" font-weight="600" letter-spacing="1">THREE SIGNERS, ONCE</text>
+      <g>
+        <rect x="14" y="40"  width="158" height="44" rx="8" fill="var(--panel-2)" stroke="var(--accent)" stroke-width="1.2"/>
+        <text x="93" y="58" fill="var(--text)" font-size="11" text-anchor="middle">Trustee</text>
+        <text x="93" y="74" fill="var(--muted)" font-size="9.5" text-anchor="middle">hardware key 1 · one seed</text>
+        <rect x="14" y="96" width="158" height="44" rx="8" fill="var(--panel-2)" stroke="var(--accent)" stroke-width="1.2"/>
+        <text x="93" y="114" fill="var(--text)" font-size="11" text-anchor="middle">Successor / co-signer</text>
+        <text x="93" y="130" fill="var(--muted)" font-size="9.5" text-anchor="middle">hardware key 2 · one seed</text>
+        <rect x="14" y="152" width="158" height="44" rx="8" fill="var(--panel-2)" stroke="var(--line)" stroke-width="1.2"/>
+        <text x="93" y="170" fill="var(--text)" font-size="11" text-anchor="middle">Collaborative custodian</text>
+        <text x="93" y="186" fill="var(--muted)" font-size="9.5" text-anchor="middle">key 3 · cannot move funds alone</text>
+      </g>
+      <!-- derivation fan -->
+      <text x="218" y="24" fill="var(--muted)" font-size="11" font-family="var(--sans)" font-weight="600" letter-spacing="1">ONE DERIVATION TREE</text>
+      <g stroke="var(--accent-dim)" stroke-width="1" opacity="0.85" fill="none">
+        <path d="M 172 62  C 230 62, 240 60, 296 60"/>
+        <path d="M 172 118 C 230 118, 240 110, 296 104"/>
+        <path d="M 172 174 C 230 174, 240 158, 296 148"/>
+        <path d="M 296 60 C 340 60, 350 60, 384 60"/>
+        <path d="M 296 104 C 340 104, 350 104, 384 104"/>
+        <path d="M 296 148 C 340 148, 350 148, 384 148"/>
+        <path d="M 296 60 C 340 70, 350 95, 384 100" opacity="0.4"/>
+        <path d="M 296 104 C 340 112, 350 140, 384 144" opacity="0.4"/>
+        <path d="M 296 148 C 340 160, 350 185, 384 192" opacity="0.4"/>
+      </g>
+      <text x="300" y="48" fill="var(--muted)" font-size="9.5">m/48'/0'/0'</text>
+      <text x="300" y="92" fill="var(--muted)" font-size="9.5">m/48'/0'/1'</text>
+      <text x="300" y="136" fill="var(--muted)" font-size="9.5">m/48'/0'/n'</text>
+      <!-- vault grid (right) -->
+      <text x="384" y="24" fill="var(--muted)" font-size="11" font-family="var(--sans)" font-weight="600" letter-spacing="1">A VAULT PER GRAT, 2-OF-3 EACH</text>
+      <g>
+        <rect x="384" y="40"  width="128" height="40" rx="7" fill="var(--panel-2)" stroke="var(--green)" stroke-width="1.1"/>
+        <text x="448" y="57" fill="var(--text)" font-size="10" text-anchor="middle">2026 GRAT No. 1</text>
+        <text x="448" y="71" fill="var(--green)" font-size="9" text-anchor="middle">remainder &rarr; children's trust</text>
+        <rect x="384" y="88" width="128" height="40" rx="7" fill="var(--panel-2)" stroke="var(--red)" stroke-width="1.1"/>
+        <text x="448" y="105" fill="var(--text)" font-size="10" text-anchor="middle">2027 GRAT No. 2</text>
+        <text x="448" y="119" fill="var(--red)" font-size="9" text-anchor="middle">exhausted &rarr; re-funds next</text>
+        <rect x="384" y="136" width="128" height="40" rx="7" fill="var(--panel-2)" stroke="var(--gray)" stroke-width="1.1"/>
+        <text x="448" y="153" fill="var(--text)" font-size="10" text-anchor="middle">2027 GRAT No. 3</text>
+        <text x="448" y="167" fill="var(--gray)" font-size="9" text-anchor="middle">in term</text>
+        <rect x="384" y="184" width="128" height="40" rx="7" fill="none" stroke="var(--line)" stroke-width="1.1" stroke-dasharray="4 4"/>
+        <text x="448" y="208" fill="var(--muted)" font-size="10" text-anchor="middle">&hellip; GRAT n</text>
+      </g>
+      <!-- contrast panel -->
+      <g>
+        <rect x="540" y="40" width="126" height="184" rx="8" fill="none" stroke="var(--line)" stroke-width="1"/>
+        <text x="603" y="60" fill="var(--muted)" font-size="9.5" text-anchor="middle" font-family="var(--sans)" font-weight="600">THE BROKERAGE</text>
+        <text x="603" y="73" fill="var(--muted)" font-size="9.5" text-anchor="middle" font-family="var(--sans)" font-weight="600">EQUIVALENT</text>
+        <text x="603" y="98"  fill="var(--red)" font-size="9.5" text-anchor="middle">n new accounts</text>
+        <text x="603" y="116" fill="var(--red)" font-size="9.5" text-anchor="middle">n applications</text>
+        <text x="603" y="134" fill="var(--red)" font-size="9.5" text-anchor="middle">n KYC reviews</text>
+        <text x="603" y="152" fill="var(--red)" font-size="9.5" text-anchor="middle">n sets of credentials</text>
+        <text x="603" y="170" fill="var(--red)" font-size="9.5" text-anchor="middle">weeks per entity</text>
+        <text x="603" y="196" fill="var(--muted)" font-size="9.5" text-anchor="middle">vs. one derivation</text>
+        <text x="603" y="210" fill="var(--muted)" font-size="9.5" text-anchor="middle">path, minutes</text>
+      </g>
+      <!-- bottom annotation -->
+      <text x="340" y="262" fill="var(--accent)" font-size="13" text-anchor="middle" font-weight="600">3 devices &middot; 1 backup ceremony &middot; unlimited vaults</text>
+      <text x="340" y="284" fill="var(--muted)" font-size="10" text-anchor="middle" font-family="var(--sans)">Every vault enforces the same 2-of-3 quorum at the protocol level; no signer can move funds alone.</text>
+      <text x="340" y="302" fill="var(--muted)" font-size="10" text-anchor="middle" font-family="var(--sans)">A new GRAT is a new derivation path and a titled descriptor &mdash; not a new institution.</text>
+    </svg>
+    <figcaption>One seed per signer, one vault per GRAT. The chain's entity count multiplies, but the
+    custody infrastructure does not.</figcaption>
+  </figure>
+  <p>It is worth saying plainly, because the intuition runs the other way: for the rolling structure,
+  this is operationally <em>easier</em> than the conventional alternative. Run the same chain with a
+  spot ETF in brokerage accounts and every new GRAT requires opening a new account at the brokerage in
+  the name of a new trust &mdash; a fresh application, entity documentation, KYC review, and signature
+  authority setup, typically weeks per entity, multiplied across every link in the chain. In the
+  multisignature architecture, a new GRAT is a derivation step: the same three signing devices, the
+  next account index on the tree, a new vault descriptor titled to the new trust, recorded in the
+  registry &mdash; minutes of work, no new institution, no new hardware, no new credentials. The
+  trustee's signing ceremony is identical for vault one and vault thirty. The structure that looks
+  exotic scales; the structure that looks familiar does not.</p>
+  <h3>Why custodial and ETF wrappers break it</h3>
+  <p>None of this can be executed on an exchange. A custodial balance is a claim, not property; the trustee cannot exercise dominion and control over an IOU, most platforms will not retitle accounts to a trust entity, and accounts freeze at notice of death &mdash; mid-term, with annuities still owed. A spot Bitcoin ETF works mechanically for the two-year term but fails the remainder, which is the entire point of the exercise: the children's trust holds for decades, compounding an expense ratio and a sponsor-plus-custodian counterparty stack, and because retail shares cannot be redeemed in kind, eventually converting to actual Bitcoin means a sale &mdash; precisely the recognition event the grantor trust architecture exists to avoid. Self-custodied coins move from grantor vault to GRAT vault to children's trust vault with no sale at any step.</p>
+</section>
+
+<section class="prose" id="the-honest-risks">
+  <h2>The Honest Risks</h2>
+  <p><strong>Mortality.</strong> If the grantor dies during a term, I.R.C. &sect;2036(a) pulls GRAT assets back into the gross estate &mdash; a risk the Ninth Circuit confirmed is real in <em>Badgley v. United States</em>, 957 F.3d 969 (9th Cir. 2020). Two-year terms keep each exposure window short, but the risk cannot be engineered to zero; a life insurance hedge in an irrevocable trust is the standard complement.</p>
+  <p><strong>Legislation.</strong> Recurring proposals &mdash; including in recent administration budget requests &mdash; would impose a ten-year minimum GRAT term and ban zeroed-out structures. Nothing has been enacted as of this writing, but either change would break new chains. The window is open, not guaranteed.</p>
+  <p><strong>GST and the ETIP.</strong> During each GRAT term the trust sits inside an estate tax inclusion period under I.R.C. &sect;2642(f): no generation-skipping exemption allocation is effective until the term ends, and allocation at that point is measured against the appreciated value &mdash; ruinously expensive for a GRAT that worked. The clean architecture routes GRAT remainders to a children's trust and runs dynasty-level GST planning on a separate, directly exemption-funded track.</p>
+  <p><strong>The gift is near zero, not zero.</strong> Because a zeroed-out annuity rate necessarily exceeds the &sect;7520 rate, the exhaustion test of Treas. Reg. &sect;25.7520-3(b)(2) treats the corpus as potentially depleted before the final payment, leaving a small but nonzero reportable gift. The planner should model the economic remainder &mdash; what actually passes at real prices &mdash; rather than rely on the actuarial one.</p>
+  <p><strong>Suitability.</strong> This is not conservative planning. It is a high-conviction structure for clients above the exemption who hold Bitcoin they are willing to commit to irrevocable trusts, who accept operational complexity, and whose trustees can actually run multisig signing ceremonies and in-kind distributions &mdash; or can delegate to someone who can, under fiduciary oversight the trust instrument expressly authorizes. A trustee who cannot operate the custody is a trustee who cannot administer the trust.</p>
+</section>
+
+<section class="prose" id="diminishing-returns-and-the-forward-case">
+  <h2>Diminishing Returns, and What Still Drives the Cycle</h2>
+  <p>Honesty requires confronting the trend most Bitcoin commentary avoids: the returns are compressing.
+  Every halving epoch has produced a smaller cycle than the last, by every measure this page can compute
+  &mdash; and a strategy pitched on 2015's hundredfold runs should expect nothing of the kind again.
+  The figure below is the uncomfortable picture: every two-year window's outcome, with the trend line
+  sliding down an order of magnitude across three epochs while the hurdle stays put.</p>
+  <figure class="livefig" id="decay-figure">
+    <div class="livefig-stat" id="decay-stat">computing&hellip;</div>
+    <div class="chart" id="decay-chart"></div>
+    <figcaption>Each dot is one two-year window (start date on the x-axis, outcome multiple on the
+    log y-axis, green where it beat that month's compounded &sect;7520 hurdle). The orange line is the
+    rolling one-year median; the dashed line is the hurdle itself &mdash; the only thing on this chart
+    that does not decay. Halving era onward; computed live from the snapshot.</figcaption>
+  </figure>
+  <table>
+    <thead>
+      <tr><th>Epoch</th><th>Median 2-yr window</th><th>Beat hurdle</th>
+          <th>Chain seeded at halving*</th><th>Median 1-yr volatility</th></tr>
+    </thead>
+    <tbody id="epoch-table"><tr><td colspan="5">computing&hellip;</td></tr></tbody>
+  </table>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:-0.6rem">*A $5M rolling chain launched on
+  the halving date and run for that epoch's four years (the current epoch's chain is still open &mdash;
+  right-censored, not failed).</p>
+  <p>One honest paragraph on what produces the cycle, because the strategy's premise leans on it. The
+  mechanical story is supply &mdash; every 210,000 blocks the new-coin subsidy halves &mdash; but that
+  flow has collapsed from roughly 12.5% of supply per year in the first epoch to 0.83% today, headed
+  for ~0.4% after 2028; published event studies find halving effects that shrink with each epoch; and
+  Bitcoin's long-run correlation with global money supply runs near 0.9, so the halving clock and the
+  liquidity cycle are confounded at three observations. The 2024&ndash;2026 cycle was the live
+  experiment: ETF demand ran roughly ten times daily mined supply and prominent institutional voices
+  declared the four-year cycle dead &mdash; yet the market topped 534 days after the halving (beside
+  526 and 548 in the prior two cycles), then fell by half. <strong>The period held; the amplitude
+  decayed.</strong> Miner economics point the same direction: <span id="c-miner">&hellip;</span>.
+  But that swing compresses every epoch, miner distribution actually clusters at capitulation bottoms
+  rather than tops, and daily issuance is now roughly a tenth of a percent of spot volume. What
+  survives is less a supply shock than a calendar the market keeps honoring &mdash; which is exactly
+  the signature in the figure above: stable period, decaying amplitude.</p>
+  <p>So does the data still support the strategy? The bar it must clear is not "repeat 2017." A rolling
+  GRAT needs the median two-year window to beat roughly a ten percent <em>cumulative</em> hurdle, with
+  the failures costing nothing. That weaker condition has held in every epoch so far &mdash; but the
+  slack is shrinking, and the unconditional success rate has slid from the high eighties to the mid
+  sixties. What the averages hide is where the remaining edge lives. Split the mature era's windows
+  (May 2020 onward) by how far below the prior high they were opened:</p>
+  <figure class="livefig" id="dd-figure">
+    <div class="chart" id="dd-bars"></div>
+    <figcaption>Mature-era windows (epochs 4&ndash;5) bucketed by entry drawdown. Compression has not
+    erased the edge &mdash; it has <strong>concentrated it into depressed entries</strong>, exactly the
+    discipline the rolling structure enforces by re-funding after every failure. The highlighted bucket
+    is where the price sits today.</figcaption>
+  </figure>
+  <p>Two conclusions follow, and they cut in different directions. First, the all-weather version of
+  this strategy &mdash; seed whenever, roll everything, let the asset do the work &mdash; is visibly
+  weaker than it was: windows opened near cycle highs now fail more often than they succeed, and
+  realized volatility (the raw material the structure converts into transfers) has halved across the
+  data, <span id="fwd-vol">&hellip;</span>. Second, the disciplined version has survived the
+  compression intact so far: in the mature era, windows opened more than forty percent below the prior
+  high cleared the hurdle <span id="fwd-dd">&hellip;</span> &mdash; entries the chain manufactures on
+  its own every time a GRAT fails and re-funds at the bottom. The forward case rests on that asymmetry
+  persisting, not on the cycles of Bitcoin's adolescence returning.</p>
+  <h3>Does the data prefer a different term? The case for three years</h3>
+  <p>The two-year term is the convention &mdash; the shortest practical exposure to &sect;2036(a) and
+  the fastest re-entry cadence. But the data contains a structural argument for three: every
+  bottom-to-top leg in Bitcoin's history has taken almost exactly <strong>three years</strong>
+  (<span id="term-legs">&hellip;</span>). A two-year GRAT seeded at a bottom hands back its corpus
+  before the cycle tops; a three-year GRAT spans the entire upleg &mdash; and because the zeroed-out
+  annuity spreads over more payments, it drains the trust at roughly
+  <span id="term-annuity">&hellip;</span>, leaving more Bitcoin compounding through the leg that matters.</p>
+  <table>
+    <thead>
+      <tr><th>Term</th><th>Mature-era windows</th><th>Entry &gt;40% off</th>
+          <th>Entry near the high</th><th>Always-roll chains*</th></tr>
+    </thead>
+    <tbody id="term-table"><tr><td colspan="5">computing&hellip;</td></tr></tbody>
+  </table>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:-0.6rem">*Median dynasty multiple across
+  halving-era start dates; longer terms are more right-censored (fewer completed windows and
+  generations before the data ends), which flatters nothing but thins the evidence.</p>
+  <p>Read the table's diagonal: with a <em>disciplined</em> entry (&gt;40% off the high), two- and
+  three-year terms perform almost identically &mdash; the chain's re-entry engine does the work. With
+  an <em>undisciplined</em> entry, the three-year term is transformative: near-high two-year windows
+  now fail 85% of the time, while near-high three-year windows still clear the hurdle almost always,
+  because three years from any point in a four-year cycle nearly always includes an upleg. The
+  decision rule the data supports is simple: <strong>the less control the client has over entry
+  timing, the longer the term should run</strong> &mdash; with the price paid in mortality exposure,
+  since each GRAT now sits inside the &sect;2036(a) window half again as long, and remainders arrive
+  on a slower cadence. Four years buys near-certainty in this sample but is really a bet that holds a
+  full cycle inside one trust: the re-entry mechanism &mdash; the engine of this whole article &mdash;
+  barely fires. The simulator's term control re-runs everything on this page at two, three, or four
+  years.</p>
+  <p>The falsifiable boundary is easy to state: this structure stops earning its complexity when the
+  median deep-drawdown window stops clearing the hurdle. The data has not crossed that line in any
+  epoch, including the current one.</p>
+</section>
+
+<section class="prose" id="the-case-for-beginning-now">
+  <h2>The Two Years Behind Us, and the Case for Beginning Now</h2>
+  <p>Everything above is history at full length. What a client deciding today needs is the last two
+  years at close range &mdash; because that is what the simulator's current reading, below, is
+  actually measuring. <span id="c-now">&hellip;</span> That round trip is the cycle anatomy of this
+  article playing out on schedule: the April 2024 halving; a top 534 days later, in line with the two
+  prior cycles; then a decline now eight months old that has returned the price to mid-2024 levels. A
+  two-year GRAT funded at the prior cycle's bottom matured into the 2024 advance and distributed its
+  remainder. One funded near the 2025 top is underwater today and will hand back its corpus with no
+  gift made and no exemption used. The chain treats both as routine; the question is which entry this
+  moment more closely resembles.</p>
+  <p>The gauges cut two ways, and a professional reading requires both halves. On the historical
+  template, the bottom is not yet in: every completed top-to-bottom leg took 11.9&ndash;13.3 months
+  (today is <span id="c-clock">&hellip;</span> through that clock); every prior bottom printed
+  77&ndash;85% below the high against today's <span id="c-dd">&hellip;</span>; and every prior bottom
+  traded <em>below</em> the market's aggregate cost basis, while today's price still sits above both
+  realized price (<span id="c-real">&hellip;</span>) and the long-term-holder cost basis
+  (<span id="c-lth">&hellip;</span>). Extrapolating the depth, higher-lows, and cost-basis trends
+  clusters a template bottom near <span id="c-range">&hellip;</span> in roughly
+  <span id="c-when">&hellip;</span>. On the other half: each cycle's bottom has printed
+  <em>shallower</em> extremes than the last, and the trend-relative gauges (Mayer
+  <span id="c-mayer">&hellip;</span>; MVRV-Z <span id="c-mvrv">&hellip;</span>) are already at
+  decay-adjusted bottom levels &mdash; an institutionalized, lower-volatility market may never deliver
+  the old capitulation signature, and the same naive fits that produce the bottom range also project a
+  next cycle top barely above the last one, a model that taken literally retires the asset. Rhyme, not
+  law. The structure's answer to the unresolved question is the asymmetry this article exists to
+  describe: a chain seeded here loses nothing if the bottom is lower, and re-funds itself there
+  automatically.</p>
+  <p>This is what the simulator's current reading distills into one number: today's composite signal
+  sits higher than roughly three-quarters of every daily reading since the first halving, and the
+  drawdown places new windows in the entry bucket that cleared the hurdle in nearly nine of ten
+  mature-era cases. The reading panel below recomputes each gauge from the data snapshot on every
+  load.</p>
+
+  <h3>How a chain seeded now should be expected to play out</h3>
+  <p>Rather than assert a forecast, the model behind this page runs the full chain engine forward
+  from today's price under five parameterized futures &mdash; 300 seeded random paths each, 1,500
+  simulated twelve-year chains in all. The scenarios are deliberately spartan, every parameter is
+  published in the repository, and no probabilities are assigned to them; the honest deliverable is
+  the spread of outcomes, not a point estimate:</p>
+  <figure class="livefig" id="mc-figure">
+    <div class="chart" id="scenario-bars"></div>
+    <figcaption>What a $5 million chain seeded at the current price delivers to the children's
+    trust over twelve years, in dollars, under each modeled future (2-year term, 105-day grace
+    window). Thin bars span the 10th&ndash;90th percentile of 300 seeded paths; thick bars the
+    interquartile range; the white marker is the median. Everything left of the dashed line means
+    the seed came back without a completed transfer &mdash; and without a taxable gift. Generated
+    by the published Monte Carlo engine; nothing on this figure is hand-drawn.</figcaption>
+  </figure>
+  <table>
+    <thead>
+      <tr><th>Scenario (12 years)</th><th>Shape</th>
+          <th>To children's trust, median</th><th>p10&ndash;p90 range</th>
+          <th>Federal estate tax avoided*</th></tr>
+    </thead>
+    <tbody id="scenario-table"><tr><td colspan="5">loading scenario results&hellip;</td></tr></tbody>
+  </table>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:-0.6rem" id="scenario-note"></p>
+  <p>In dollars, for the $5 million seed: the base case &mdash; cycles continuing with historical
+  decay &mdash; delivers a median of roughly <strong>$10.4 million</strong> to the children's trust
+  over twelve years, which for an estate above the exemption is on the order of
+  <strong>$4 million of federal estate tax that is never owed</strong>. Gentler compression pays
+  $14&ndash;21 million; a cycle that breaks into a drift market still pays about $4 million; and the
+  secular bear pays roughly $1 million &mdash; at a cost of approximately nothing, because the floor
+  is statutory: no gift made, no exemption burned, corpus returned. Each remainder is valued on its
+  distribution date; whatever the children's trust does with the coins afterward compounds outside
+  the model and outside the estate. Two structural points complete the picture. The chain is long
+  volatility itself &mdash; where drift merely matches the hurdle, the random wobble alone lifts the
+  average outcome to about the seed, which is why per-GRAT failure rates of 30&ndash;80% are normal
+  operation, not malfunction. And on whether the four-year cycle persists at all, three completed
+  observations cannot carry a real probability &mdash; but the chain, unlike a forecast, does not
+  require the question to be resolved. <span id="fwd-now">&hellip;</span></p>
+  <h3>Against the alternatives &mdash; other assets, other techniques</h3>
+  <p>Whether twice the seed is a strong result depends on the benchmark, so run the benchmark: the
+  identical chain &mdash; same engine, same terms, same hurdle &mdash; over the assets a client would
+  actually consider instead, with every parameter disclosed:</p>
+  <table>
+    <thead>
+      <tr><th>Asset (same $5M chain)</th><th>Parameters</th>
+          <th>To children's trust, median</th><th>p10&ndash;p90 range</th><th>Per-GRAT failures</th></tr>
+    </thead>
+    <tbody id="compare-table"><tr><td colspan="5">loading comparison&hellip;</td></tr></tbody>
+  </table>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:-0.6rem">Identical engine and settings as
+  the scenario table above; the Bitcoin row is the decay-continuation base case, one of the five
+  published scenarios. Stylized constant-drift paths understate equity and gold tail behavior; the
+  comparison is apples-to-apples on chain mechanics. Parameters and seeds: asset_comparison.py.</p>
+  <p>The ranking is not close, and the reason is structural. The Bitcoin chain dominates at every
+  percentile while <em>failing more often</em> (46% of its GRATs against 40% for equities) &mdash;
+  because a zeroed-out GRAT's failure costs nothing and its success is uncapped, the chain is a
+  volatility harvester, not a return harvester. The table proves it twice over: gold, with drift
+  sitting exactly at the hurdle, still transfers nearly as much as the higher-drift balanced
+  portfolio; and equities with the volatility switched off transfer barely half of what they
+  transfer with it on. Conventional practice reports the same physics: practitioner Monte Carlo
+  research on diversified-equity rolling GRATs finds median transfers near a quarter of funded value
+  over four years, and the technique's storied successes &mdash; the pre-IPO and concentrated-stock
+  GRATs of public record &mdash; were volatility plays from the start, while the original
+  <em>Walton</em> GRAT itself, funded with mature retailer stock across a flat two years, returned
+  everything and transferred nothing. By the standards of GRAT practice, the base case here is not
+  modest. It is what the structure produces when it finally meets the asset class it was built for.</p>
+  <table>
+    <thead>
+      <tr><th>Technique, same Bitcoin</th><th>Exemption consumed</th>
+          <th>If the asset halves mid-term</th><th>Built-in reset</th><th>Exit</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Outright gift to trust</strong></td><td>Dollar-for-dollar</td>
+          <td>The loss is the family's; the exemption is spent either way</td><td>None</td>
+          <td>Irrevocable</td></tr>
+      <tr><td><strong>Installment sale to IDGT</strong></td><td>Seed gift (~10%)</td>
+          <td>Trust is underwater; the note is still due at the old price</td>
+          <td>None &mdash; frozen at the sale price</td><td>Note runs for years</td></tr>
+      <tr><td><strong>Hold until death (&sect;1014 step-up)</strong></td><td>None</td>
+          <td>Estate bears it, then 40% tax on whatever remains</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><td><strong>Rolling GRAT chain</strong></td><td>None</td>
+          <td>Corpus returns &mdash; no gift, no exemption &mdash; and re-seeds at the low</td>
+          <td>Every two years, automatic</td><td>Any link; stop when satisfied</td></tr>
+    </tbody>
+  </table>
+  <p>And the chain is the only entry on that list that is a sequence of options rather than a
+  commitment. Fund a single GRAT today and the decision resolves at the two-year mark:
+  <span id="opt-first">&hellip;</span> If the link fails instead, the corpus is back in hand at what
+  is by then a lower price &mdash; re-seeding is a choice, not an obligation, and the client who
+  stops has lost nothing but time. If it succeeds and the family is satisfied, stopping is equally
+  clean: transfers already made are final and outside the estate. <span id="opt-year4">&hellip;</span>
+  In no modeled path, for either asset, did twelve years pass without at least one completed
+  transfer. No alternative on the list offers this: the gift is spent on day one, the installment
+  note runs for years, and holding until death is a single irreversible bet on the estate tax. The
+  chain lets a client buy the first option, look at the result, and decide the rest later.</p>
+  <p>Read as a decision rather than a dataset: a client holding Bitcoin above the exemption, able to
+  commit $5 million to irrevocable trusts, is choosing between leaving the position in the estate
+  &mdash; where every dollar of further appreciation compounds a 40% liability &mdash; and seeding a
+  chain that pays meaningfully in four of the five modeled futures and costs approximately nothing in
+  the fifth. The entry sits in the historically strongest bucket the mature era has produced. The
+  configuration the data favors is unambiguous: the two-year term unless the client cannot exercise
+  entry discipline, the 105-day grace window, mechanical re-funding, collaborative multisignature
+  custody titled to each trust. The risks that govern &mdash; mortality under &sect;2036(a), the
+  legislative window, trustee competence &mdash; are real, and none of them improves by waiting.
+  What no model can decide is suitability; that is what counsel is for.</p>
+  <blockquote class="pull">The statute fixes the structure. The data decides the timing.</blockquote>
+  <p>So test it. The simulator below runs the full rolling chain &mdash; funding, zeroed-out
+  annuities, graceful failures, re-entries, and remainders &mdash; against sixteen years of real
+  daily market data, and re-runs the historical policy comparison at any term and threshold. Pick a
+  start date and watch what the chain would actually have moved out of the estate.</p>
+  <p class="endnote"><em>This article is educational analysis, not tax, legal, or investment advice.
+  The simulator below is decision support over historical data and published model scenarios &mdash;
+  distributions, not forecasts.</em></p>
+</section>
+
+<!-- ============================== SIMULATOR ============================ -->
+
+<div class="sim-wrap" id="simulator">
+  <div class="sim-head">
+    <h2>The Simulator</h2>
+    <div class="datastamp" id="datastamp">loading data&hellip;</div>
+    <p class="lede">Every control below re-runs the full chain state machine &mdash; zeroed-out annuity math per
+    the funding month's actual IRS &sect;7520 rate, in-kind BTC payments, graceful failures, re-entries,
+    remainders to the children's trust &mdash; against real daily market data. Nothing is precomputed.</p>
+  </div>
+
+  <noscript><div class="notice">The simulator requires JavaScript.</div></noscript>
+
+  <div class="panel" id="reading-panel">
+    <h3>Current reading &mdash; the composite entry signal today</h3>
+    <div class="reading">
+      <div class="gauge" id="gauge"></div>
+      <div class="facts" id="reading-facts"></div>
+      <div class="bars" id="reading-bars"></div>
+    </div>
+    <div class="reading-meaning" id="reading-meaning"></div>
+  </div>
+
+  <div class="panel">
+    <h3>Chain configuration</h3>
+    <div class="controls">
+      <div class="ctl" style="grid-column: 1 / -1;">
+        <label class="name">Analysis era &mdash; where statistics and start dates begin</label>
+        <div class="seg" id="era-seg"></div>
+        <div class="subctl" id="era-note" style="font-size:0.78rem;color:var(--muted);line-height:1.5"></div>
+      </div>
+      <div class="ctl" style="grid-column: 1 / -1;">
+        <label class="name">Start date &mdash; when the first GRAT is funded</label>
+        <div class="row">
+          <input type="range" id="start-slider" min="0" max="100" value="0" step="1">
+          <span class="readout" id="start-readout"></span>
+        </div>
+        <div class="chips" id="start-chips"></div>
+      </div>
+      <div class="ctl">
+        <label class="name">Initial funding (USD of BTC)</label>
+        <input type="text" id="fund-input" value="5,000,000" inputmode="numeric">
+        <div class="chips">
+          <button class="chip" data-fund="1000000">$1M</button>
+          <button class="chip" data-fund="5000000">$5M</button>
+          <button class="chip" data-fund="10000000">$10M</button>
+        </div>
+      </div>
+      <div class="ctl">
+        <label class="name">Term &amp; annuity</label>
+        <div class="row">
+          <select id="term-select">
+            <option value="2" selected>2-year term</option>
+            <option value="3">3-year term</option>
+            <option value="4">4-year term</option>
+          </select>
+        </div>
+        <div class="subctl seg" id="annuity-seg">
+          <button data-esc="0" class="on">Level</button>
+          <button data-esc="20">20%/yr escalating</button>
+        </div>
+      </div>
+      <div class="ctl">
+        <label class="name">Grace window (Treas. Reg. 25.2702-3(b)(4))</label>
+        <div class="row">
+          <input type="range" id="grace-slider" min="0" max="105" step="105" value="0">
+          <span class="readout" id="grace-readout">pay on due date</span>
+        </div>
+      </div>
+      <div class="ctl">
+        <label class="name">Re-funding policy</label>
+        <div class="seg" id="policy-seg">
+          <button data-policy="always" class="on">Always roll</button>
+          <button data-policy="seed-gated">Seed-gated</button>
+          <button data-policy="fully-gated">Fully gated</button>
+        </div>
+        <div class="subctl" id="threshold-ctl">
+          <div class="row">
+            <input type="range" id="threshold-slider" min="0.2" max="0.8" step="0.05" value="0.5">
+            <span class="readout" id="threshold-readout">signal &ge; 0.50</span>
+          </div>
+        </div>
+      </div>
+      <div class="ctl">
+        <label class="name">Mortality (&sect;2036(a))</label>
+        <label class="toggle"><input type="checkbox" id="death-toggle"> Grantor dies during the chain</label>
+        <div class="subctl hidden" id="death-ctls">
+          <input type="date" id="death-date">
+          <div class="row" style="margin-top:0.45rem">
+            <input type="range" id="surv-slider" min="0.5" max="1" step="0.01" value="0.85">
+            <span class="readout" id="surv-readout">P(survive) 0.85</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" id="seed-note" style="display:none"></div>
+
+  <div class="cards" id="cards" style="margin-top:1.2rem"></div>
+
+  <div class="panel">
+    <h3>The chain on the price path</h3>
+    <div class="chart" id="price-chart"></div>
+    <div class="legend">
+      <span class="key"><span class="sw" style="background:var(--accent)"></span> BTC price (log)</span>
+      <span class="key"><span class="sw" style="background:var(--green)"></span> GRAT term &rarr; remainder distributed</span>
+      <span class="key"><span class="sw" style="background:var(--red)"></span> GRAT exhausted (graceful failure)</span>
+      <span class="key"><span class="sw" style="background:var(--gray)"></span> still in term at data horizon</span>
+      <span class="key"><span class="sw" style="background:var(--purple)"></span> open at death (&sect;2036(a))</span>
+      <span class="key"><span class="sw" style="background:transparent;border:1px dashed var(--muted);height:0"></span> halvings</span>
+      <span class="key"><span style="color:var(--red);font-size:0.9rem">&#9661;</span> Pi-Cycle top signal (historically the worst seeding days)</span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Every GRAT in the chain</h3>
+    <div class="table-scroll"><table class="data" id="chain-table"></table></div>
+    <button class="morebtn hidden" id="more-rows">Show all rows</button>
+  </div>
+
+  <div class="panel hidden" id="mortality-panel">
+    <h3>Mortality scenario &mdash; &sect;2036(a)</h3>
+    <div class="mort-grid" id="mort-grid"></div>
+    <div class="expected" id="mort-expected"></div>
+  </div>
+
+  <div class="panel">
+    <h3>When to begin &mdash; this start date against all of history</h3>
+    <p style="color:var(--muted); font-size:0.9rem; margin-top:0">
+      A chain is launched from every month in the data (same settings), under each of the three
+      re-funding policies. The histogram shows the distribution of outcomes; your selected start is marked.
+      Gated chains whose signal never clears count as 0x &mdash; waiting has a price.</p>
+    <div class="sweep-status" id="sweep-status">Preparing historical sweep&hellip;</div>
+    <div class="progress"><div class="p" id="sweep-progress"></div></div>
+    <div class="chart" id="hist-chart" style="margin-top:0.8rem"></div>
+    <div class="table-scroll" style="margin-top:0.8rem"><table class="data" id="sweep-table"></table></div>
+  </div>
+</div>
+
+<!-- ============================ METHODOLOGY ============================ -->
+
+<section class="method" id="methodology">
+  <h2>Methodology &amp; Engineering Notes</h2>
+  <ul>
+    <li><strong>Engine.</strong> The simulator is a line-for-line JavaScript port of a Python research engine
+      (<code>grat_timing.py</code>) covered by 26 unit tests pinned to the worked examples in
+      <em>Planning an Estate: A Guidebook of Principles and Techniques</em> &sect;&sect;9:6, 8:44 &mdash;
+      the <em>Walton</em> level-annuity factor
+      (15-yr, $1M at 6% &rarr; $102,963), the 20% escalating schedule (2-yr, $1M at 2.8% &rarr; $474,316 then
+      $569,179), and the &sect;2036(a) capitalization with its trust-value cap. Python and JavaScript outputs
+      agree to full floating-point precision on identical scenarios.</li>
+    <li><strong>Conservation invariant.</strong> Every chain certifies that the BTC funded into GRAT No. 1
+      equals dynasty remainders + coins still in trust at the data horizon + coins returned to the grantor
+      un-rolled + the gated holding pool + corpus swept to the estate at death &mdash; to ~10<sup>&minus;13</sup> BTC.
+      The residual is shown live under the summary cards.</li>
+    <li><strong>Rates.</strong> Each GRAT is zeroed out at the actual IRS &sect;7520 rate for its funding month
+      (monthly table, 2010&ndash;2026, transcribed from the IRS rate tables &mdash; verify any month you rely on).
+      The annuity rate of a zeroed-out short GRAT always exceeds the &sect;7520 rate, implicating the exhaustion
+      test of Treas. Reg. &sect;25.7520-3(b)(2); the model reports the economic remainder, and the tiny reportable
+      gift is noted rather than modeled.</li>
+    <li><strong>Data.</strong> Daily BTC price, drawdown-from-ATH, MVRV Z-score, Mayer Multiple, realized
+      price, NUPL, Pi-Cycle moving averages, and the long-term-holder cost basis from the
+      <a href="https://newhedge.io" rel="noopener">NewHedge</a> API, snapshotted at build time.
+      No API calls or credentials exist in this page; the snapshot date is printed at the top of the simulator.
+      The hurdle-clearance figure in the article and all chart annotations are computed client-side from
+      this snapshot &mdash; nothing is hand-drawn.</li>
+    <li><strong>Entry signal.</strong> A transparent, fixed-weight composite of cycle-position metrics
+      (drawdown 30%, MVRV-Z 20%, Mayer 20%, price/realized 15%, months-since-halving 15%). The weights encode
+      the article's thesis; they are not fitted, and they are deliberately simple enough to audit by eye.</li>
+    <li><strong>Analysis era.</strong> There is no universal convention for where Bitcoin backtests begin, but
+      academic work typically starts in 2013 or later, citing pre-2013 exchange data quality and liquidity
+      (Mt.&nbsp;Gox-era records are incomplete and manipulable), and cycle studies anchor on the halving epochs.
+      This page defaults all statistics to the <strong>halving era (first halving, Nov&nbsp;28,&nbsp;2012 &rarr;)</strong>
+      &mdash; the regime the strategy's thesis depends on &mdash; with two alternatives one click away: full
+      history (2010&nbsp;&rarr;, inflates every statistic with returns that were not executable at modeled
+      position sizes) and the custody era (2017&nbsp;&rarr;, when trust-grade multisig custody practically
+      existed). The price chart always shows full history for context; the era governs which start dates
+      enter the statistics.</li>
+    <li><strong>Compression analysis.</strong> The diminishing-returns section computes, per halving epoch:
+      forward two-year window multiples against each funding month's compounded &sect;7520 hurdle, a log-log
+      regression of window outcome on entry price, fixed-runway chains seeded on each halving date (the open
+      epoch's chain is right-censored, not failed), NewHedge's 1-year realized volatility, and mature-era
+      hurdle clearance bucketed by entry drawdown. All of it recomputes from the snapshot on every load.</li>
+    <li><strong>Scenario model.</strong> The next-decade table is a seeded Monte Carlo
+      (<code>next_cycle_model.py</code>, results in <code>next_cycle_results.json</code> /
+      <code>site/scenarios.js</code>): five deterministic cycle skeletons anchored to the historical
+      leg durations and decay sequences, multiplied by 300 mean-zero log-normal noise paths each, run
+      through the same verified chain engine at a flat 5.0% &sect;7520 (a stated simplification).
+      Scenario parameters are published in full; no probabilities are assigned to scenarios. The cycle
+      and miner claims in this section draw on protocol arithmetic, the NewHedge mining series (Puell
+      Multiple, miner revenue, reserves, outflows), published event studies of halvings, and
+      institutional research on the macro-liquidity correlation; positions on both sides of the
+      "cycle is dead" question are represented as attributed views, not endorsements. The asset-class
+      comparison runs the identical chain over stylized constant-drift paths for equities, a 60/40
+      portfolio, and gold (<code>asset_comparison.py</code> &rarr; <code>compare.js</code>, seeds
+      documented); the conventional-GRAT benchmarks quoted in the prose draw on practitioner Monte
+      Carlo research on diversified-equity rolling GRATs published in <em>Trusts &amp; Estates</em>
+      (2008&ndash;2024) and the public record of concentrated-stock GRATs.</li>
+    <li><strong>Honesty constraints.</strong> Distributions over ~4 Bitcoin cycles are tiny samples; later start
+      dates are right-censored (fewer generations fit before the data ends); chains compound path-dependence.
+      Every number on this page is a description of history, not a forecast of anything.</li>
+  </ul>
+</section>
+
+<!-- =============================== FOOTER ============================== -->
+
+<footer id="author">
+  <div class="foot-inner" style="grid-template-columns: 1fr">
+    <div>
+      <h3>About the author</h3>
+      <p><strong style="color:var(--text)">Benjamin Ross Sternfeld</strong> &mdash; J.D., Chapman University
+      Dale E. Fowler School of Law (May 2026), with an academic focus in estate planning, wills &amp; trusts,
+      and taxation.</p>
+      <p>This page is a self-contained research artifact: a Python engine with a verified unit-test suite,
+      ported to client-side JavaScript, running on real market data. View source freely.</p>
+    </div>
+  </div>
+  <div class="smallprint">
+    Educational analysis and decision support only &mdash; not tax, legal, or investment advice, and not an
+    offer of any service. Historical distributions are not forecasts. &sect;2036(a) mortality risk, proposed
+    legislation (10-year minimum terms; zeroed-out bans), GST/ETIP limits under &sect;2642(f), and client
+    suitability govern any real implementation. IRS &sect;7520 rates should be verified against the published
+    tables before reliance. Market data &copy; NewHedge, used for research; price data snapshotted at build time.
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="scenarios.js"></script>
+<script src="compare.js"></script>
+<script src="model.js"></script>
+<script src="app.js"></script>
+<script src="chain_motion.js"></script>
+</body>
+</html>
