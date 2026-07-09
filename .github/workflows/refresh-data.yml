@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: refresh-data
@@ -15,6 +16,7 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Check out site
         uses: actions/checkout@v4
@@ -39,4 +41,26 @@ jobs:
           else
             git commit -m "Data refresh: $(date -u +%Y-%m-%d)"
             git push
+          fi
+
+      # If the refresh fails, file (or bump) a GitHub issue so the failure is
+      # loud. Without this, failure emails are easy to miss and GitHub disables
+      # the cron entirely after 60 days without repo activity.
+      - name: Alert on failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          existing=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+            --search "Data refresh failing in:title" --json number --jq '.[0].number')
+          run_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          if [ -z "$existing" ]; then
+            gh issue create --repo "$GITHUB_REPOSITORY" \
+              --title "Data refresh failing since $(date -u +%Y-%m-%d)" \
+              --body "The nightly data refresh failed: $run_url
+
+          The site keeps serving the last good snapshot, but if this keeps failing for 60 days GitHub will disable the schedule (re-enable it under the Actions tab). Common causes: NewHedge renamed a metric slug, the API token was revoked, or a sanity gate caught bad upstream data."
+          else
+            gh issue comment "$existing" --repo "$GITHUB_REPOSITORY" \
+              --body "Still failing: $run_url"
           fi
