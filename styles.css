@@ -242,4 +242,7 @@ footer a { color: var(--accent); text-decoration: none; }
 @media (max-width: 700px) {
   .foot-inner { grid-template-columns: 1fr; }
   nav .links a { margin-left: 0.7rem; font-size: 0.8rem; }
+  /* Tables scroll inside their own box instead of widening the page */
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .table-scroll table { display: table; }
 }
