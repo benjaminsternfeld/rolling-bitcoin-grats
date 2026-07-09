@@ -25,7 +25,7 @@
 <!-- ============================== ARTICLE ============================== -->
 
 <section class="prose" id="the-hurdle-is-4-6-percent">
-  <p style="border:1px solid var(--line,#444); border-left:3px solid var(--muted,#888); border-radius:4px; padding:.6em .9em; font-size:.85em; color:var(--muted,#888); margin-bottom:1.5em;"><b>Data note:</b> Everything on this page &mdash; prices, on-chain metrics, and simulator results &mdash; runs on a fixed market-data snapshot taken <b>June 10, 2026</b> (last BTC close: $61,689). The site does not update and does not reflect market or &sect;7520 rate changes since that date.</p>
+  <p style="border:1px solid var(--line,#444); border-left:3px solid var(--muted,#888); border-radius:4px; padding:.6em .9em; font-size:.85em; color:var(--muted,#888); margin-bottom:1.5em;"><b>Data note:</b> Everything on this page &mdash; prices, on-chain metrics, and simulator results &mdash; runs on a market-data snapshot refreshed automatically each day, currently through <b id="data-note-date">June 10, 2026</b> (last BTC close: <span id="data-note-price">$61,689</span>). Figures do not reflect intraday moves or &sect;7520 rate announcements after that date.</p>
   <h1>The Hurdle Is 4.6 Percent. The Asset Is Bitcoin.</h1>
   <p class="standfirst">How a chain of rolling, zeroed-out GRATs converts Bitcoin's violent drawdowns into systematic, gift-tax-free transfers &mdash; compounding appreciation out of the taxable estate two years at a time.</p>
   <p>The federal wealth-transfer system prices every gift against one number: the &sect;7520 rate &mdash; 4.6% as of April 2026, reset monthly by the IRS (the simulator below always uses the actual rate for each funding month). Whatever a properly built trust earns above that hurdle during its term passes to the next generation free of gift and estate tax. Bitcoin has cleared that hurdle in nearly every two-year window of its existence &mdash; and in the windows where it has not, the structure described below loses nothing. No gift. No exemption consumed. The coins simply come home and try again at a lower price.</p>
@@ -696,6 +696,22 @@
 </footer>
 
 <script src="data.js"></script>
+<script>
+(function () {
+  try {
+    var s = window.NH_DATA && NH_DATA.series && NH_DATA.series.price;
+    if (!s || !s.length) return;
+    var last = s[s.length - 1];
+    var d = new Date(last[0]);
+    var months = ['January','February','March','April','May','June',
+                  'July','August','September','October','November','December'];
+    var dateEl = document.getElementById('data-note-date');
+    var priceEl = document.getElementById('data-note-price');
+    if (dateEl) dateEl.textContent = months[d.getUTCMonth()] + ' ' + d.getUTCDate() + ', ' + d.getUTCFullYear();
+    if (priceEl) priceEl.textContent = '$' + Math.round(last[1]).toLocaleString('en-US');
+  } catch (e) { /* fall back to the hardcoded text */ }
+})();
+</script>
 <script src="scenarios.js"></script>
 <script src="compare.js"></script>
 <script src="model.js"></script>
