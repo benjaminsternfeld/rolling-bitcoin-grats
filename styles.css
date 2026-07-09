@@ -245,9 +245,10 @@ footer a { color: var(--accent); text-decoration: none; }
   /* Tables scroll inside their own box instead of widening the page */
   table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .table-scroll table { display: table; }
-  /* Sliders get a full-width line of their own; long readouts wrap below
+  /* Sliders get a full-width line of their own; long readouts sit below
      instead of crushing the slider to zero width */
-  .ctl .row { flex-wrap: wrap; }
-  .ctl input[type="range"] { flex: 1 1 100%; min-width: 0; }
-  .ctl .readout { white-space: normal; }
+  .ctl .row { display: block; }
+  .ctl .row input[type="range"] { display: block; width: 100%; margin: 0 0 0.35rem; }
+  .ctl .row select { width: 100%; }
+  .ctl .readout { display: block; white-space: normal; }
 }
