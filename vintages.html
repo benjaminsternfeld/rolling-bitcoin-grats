@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vintage Board — Rolling Bitcoin GRATs Desk</title>
+<meta name="description" content="Every monthly rolling-GRAT vintage since the first halving: seed date, entry conditions, and what the chain delivered — computed live from the daily market snapshot.">
+<link rel="stylesheet" href="styles.css?v=2">
+<link rel="stylesheet" href="desk.css?v=1">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>&#8383;</text></svg>">
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="signal.html"><b>&#8383;</b> Rolling Bitcoin GRATs <span style="color:var(--muted)">&middot; Desk</span></a>
+  <span class="links">
+    <a href="signal.html">Signal</a>
+    <a href="vintages.html" style="color:var(--accent)">Vintages</a>
+    <a href="index.html">The Article</a>
+    <a href="index.html#methodology">Method</a>
+  </span>
+</nav>
+
+<div class="stampbar" id="stampbar"></div>
+
+<main class="desk">
+  <h1>The Vintage Board</h1>
+  <p class="sub">One chain per calendar month: $1,000,000 seeded on the first trading day, two-year zeroed-out GRATs at that month's actual &sect;7520 rate, every annuity re-rolled — identical mechanics to the article's simulator, run to the current snapshot. Sorted newest first. Chains need a completed two-year window, so the newest vintages are two years back.</p>
+
+  <div class="cards" id="bucket-cards">
+    <div class="card"><h3>Deep-drawdown vintages (&ge;50% off high)</h3><div class="big" id="b-deep">&mdash;</div><div class="note" id="b-deep-n"></div></div>
+    <div class="card"><h3>Mid-drawdown vintages (25&ndash;50%)</h3><div class="big" id="b-mid">&mdash;</div><div class="note" id="b-mid-n"></div></div>
+    <div class="card"><h3>Shallow vintages (&lt;25% off high)</h3><div class="big" id="b-shallow">&mdash;</div><div class="note" id="b-shallow-n"></div></div>
+  </div>
+
+  <div class="seg era" id="era">
+    <button data-from="halving" class="on">Halving era &middot; Nov 2012 &rarr;</button>
+    <button data-from="custody">Custody era &middot; 2017 &rarr;</button>
+  </div>
+  <div class="progress" id="progress">Computing vintages&hellip;</div>
+
+  <div class="tablewrap">
+    <table class="desk-t" id="board">
+      <thead><tr>
+        <th>Vintage</th><th>Seed price</th><th>Entry drawdown</th><th>Index</th><th>&sect;7520</th>
+        <th>GRATs</th><th>Passed / Failed</th><th>To children&rsquo;s trust</th><th>Per $1M seeded</th>
+      </tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div class="verdict" id="verdict" style="display:none"></div>
+
+  <div class="disclaimer">
+    <b>Educational reference only.</b> Every row is a hypothetical simulation over historical data: in-kind annuity payments at each window's local price high within the regulatory grace period, actual monthly &sect;7520 rates, no fees or trustee costs, and no account of grantor mortality (&sect;2036(a)), legislative change, or suitability &mdash; the considerations that dominate real decisions. Later vintages have had less time to compound, so multiples are not comparable across vintages of different ages; compare a vintage to its neighbors, not to 2013. Past patterns in roughly four market cycles are a small sample and no prediction. Not legal, tax, or investment advice; no attorney-client relationship. Evaluate with your own estate planning counsel.
+  </div>
+</main>
+
+<script src="data.js"></script>
+<script src="model.js"></script>
+<script src="desk.js"></script>
+<script>
+(function () {
+  const K = window.DESK, $ = id => document.getElementById(id);
+  K.fillStamp();
+
+  const CUSTODY0 = Date.UTC(2017, 0, 1);
+  const tb = document.querySelector("#board tbody");
+  const fmtM = x => x >= 1e9 ? "$" + (x / 1e9).toFixed(2) + "B"
+                 : x >= 1e6 ? "$" + (x / 1e6).toFixed(2) + "M"
+                 : "$" + Math.round(x / 1e3) + "k";
+
+  let all = null;
+
+  function ddChip(dd) {
+    if (dd === null) return "";
+    const cls = dd >= 50 ? "deep" : dd >= 25 ? "mid" : "shallow";
+    return `<span class="chip ${cls}">-${dd.toFixed(0)}%</span>`;
+  }
+
+  function render(fromMs) {
+    const rows = all.filter(r => r.ms >= fromMs).sort((a, b) => b.ms - a.ms);
+    tb.innerHTML = "";
+    const frag = [];
+    for (const r of rows) {
+      const win = r.multiple >= 1;
+      frag.push(
+        `<tr class="${win ? "win" : "loss"}"><td>${K.fmtDate(r.ms).slice(0, 7)}</td>` +
+        `<td>${K.fmtUsd0(r.price)}</td><td>${ddChip(r.dd)}</td><td>${r.index}</td>` +
+        `<td>${r.rate.toFixed(1)}%</td><td>${r.nGrats}</td>` +
+        `<td>${r.nCompleted} / ${r.nFailed}</td><td>${fmtM(r.dynastyUsd)}</td>` +
+        `<td class="mult">${r.multiple.toFixed(2)}&times;</td></tr>`);
+    }
+    tb.innerHTML = frag.join("");
+
+    const s = K.bucketStats(rows);
+    const put = (id, st) => {
+      $(id).textContent = st.median === null ? "—" : st.median.toFixed(2) + "× median";
+      $(id + "-n").textContent = st.n + " vintages in this era view";
+    };
+    put("b-deep", s.deep); put("b-mid", s.mid); put("b-shallow", s.shallow);
+
+    const v = $("verdict");
+    if (s.deep.median !== null && s.shallow.median !== null) {
+      v.style.display = "";
+      v.innerHTML = `<b>The pattern the whole strategy rests on:</b> in this era view, the median deep-drawdown vintage ` +
+        `delivered <b>${s.deep.median.toFixed(2)}&times;</b> its seed to the children&rsquo;s trust versus ` +
+        `<b>${s.shallow.median.toFixed(2)}&times;</b> for vintages seeded within 25% of the high &mdash; ` +
+        `and the failed windows in every vintage cost nothing but time. Entry depth is not a prediction; ` +
+        `it is where the hurdle gets re-priced. Today&rsquo;s entry conditions are on the ` +
+        `<a href="signal.html" style="color:var(--accent)">signal page</a>.`;
+    }
+  }
+
+  const eraFrom = { halving: K.HALVING0, custody: CUSTODY0 };
+  K.sweepVintages(K.HALVING0, (done, total) => {
+    $("progress").textContent = `Computing vintages… ${done} / ${total}`;
+  }, rows => {
+    all = rows;
+    $("progress").textContent = rows.length + " monthly vintages · every number recomputed from the " +
+      K.fmtDate(K.lastMs) + " snapshot on load";
+    render(K.HALVING0);
+    document.querySelectorAll("#era button").forEach(b => b.addEventListener("click", () => {
+      document.querySelectorAll("#era button").forEach(x => x.classList.remove("on"));
+      b.classList.add("on");
+      render(eraFrom[b.dataset.from]);
+    }));
+  });
+})();
+</script>
+</body>
+</html>

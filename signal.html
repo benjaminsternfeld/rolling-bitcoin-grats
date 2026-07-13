@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GRAT Entry Index — Rolling Bitcoin GRATs Desk</title>
+<meta name="description" content="Today's rolling-GRAT entry conditions: one index, one regime word, and the historical record behind both. Computed live from the daily market snapshot.">
+<link rel="stylesheet" href="styles.css?v=2">
+<link rel="stylesheet" href="desk.css?v=1">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>&#8383;</text></svg>">
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="signal.html"><b>&#8383;</b> Rolling Bitcoin GRATs <span style="color:var(--muted)">&middot; Desk</span></a>
+  <span class="links">
+    <a href="signal.html" style="color:var(--accent)">Signal</a>
+    <a href="vintages.html">Vintages</a>
+    <a href="index.html">The Article</a>
+    <a href="index.html#methodology">Method</a>
+  </span>
+</nav>
+
+<div class="stampbar" id="stampbar"></div>
+
+<main class="desk">
+  <h1>GRAT Entry Index</h1>
+  <p class="sub">Today's rolling-GRAT entry conditions, scored against every day of Bitcoin's halving-era history. Recomputed from the market snapshot on every load; the snapshot refreshes nightly.</p>
+
+  <div class="hero">
+    <div class="idx"><span class="n" id="idx">&mdash;</span><span class="of"> / 100</span></div>
+    <div class="regime">
+      <div class="word" id="regime-word">&mdash;</div>
+      <div class="expl" id="regime-expl"></div>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Drawdown from high</h3>
+      <div class="big" id="c-dd">&mdash;</div>
+      <div class="note" id="c-dd-note"></div>
+    </div>
+    <div class="card">
+      <h3>&sect;7520 hurdle</h3>
+      <div class="big" id="c-rate">&mdash;</div>
+      <div class="note" id="c-rate-note"></div>
+    </div>
+    <div class="card">
+      <h3>Two-year hurdle to beat</h3>
+      <div class="big" id="c-hurdle">&mdash;</div>
+      <div class="note">Compounded &sect;7520 over a two-year term. Growth above this passes to the remainder trust free of gift and estate tax; growth below it returns the coins to the grantor at no cost.</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin:1.2rem 0">
+    <h3>Index components (weights fixed in the engine)</h3>
+    <div id="components"></div>
+    <div class="note">Composite of five cycle-position readings; weights are constants in the published engine and are never tuned after the fact. Higher = historically stronger entry conditions for the first GRAT in a chain.</div>
+  </div>
+
+  <h2 style="font-family:var(--serif);font-size:1.3rem;margin:2.2rem 0 0.6rem">The three closest historical analogs</h2>
+  <p class="sub" style="margin-bottom:0.8rem">Halving-era dates whose composite reading sat closest to today's, each with a completed two-year window. What happened next is the record, not a projection.</p>
+  <div class="tablewrap">
+    <table class="desk-t" id="analogs">
+      <thead><tr>
+        <th>Seed date</th><th>Index then</th><th>Drawdown</th><th>&sect;7520</th>
+        <th>First GRAT</th><th>Remainder (% of funding)</th><th>Chain, seeded then &rarr; today</th>
+      </tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div class="verdict" id="verdict"></div>
+
+  <div class="method">
+    <h2>Method, in full</h2>
+    <p>The index is <code>round(100 &times; signal)</code>, where <code>signal</code> is the composite entry score defined in <a href="model.js" style="color:var(--accent)">model.js</a> (weights: drawdown from high 30%, MVRV-Z 20%, Mayer Multiple 20%, price vs. realized price 15%, months-since-halving phase 15%). Regime words map to fixed index bands (&ge;70 Deep Drawdown Entry, 55&ndash;69 Favorable, 40&ndash;54 Neutral, 25&ndash;39 Extended, &lt;25 Peak Risk). The mapping is fixed and versioned; it is never adjusted to fit outcomes. Every number on this page is a pure function of the committed data snapshot, so any past day's reading can be reproduced exactly from that day's <code>data.js</code> in the repository history &mdash; the git log is the track record. Analog chains use the identical engine, rules, and actual monthly &sect;7520 rates described in <a href="index.html#methodology" style="color:var(--accent)">the article's methodology</a>.</p>
+  </div>
+
+  <div class="disclaimer">
+    <b>Educational reference only.</b> This page presents historical simulations and current market readings; it is not legal, tax, or investment advice, makes no prediction, and creates no attorney-client relationship. Simulated GRAT outcomes are hypothetical, assume in-kind annuity payments at each window's local price high within the regulatory grace period, and exclude fees, trustee costs, and the grantor-mortality, legislative, and suitability considerations that dominate real decisions. Bitcoin has roughly four market cycles of history; distributions drawn from it are small samples. A strategy of this kind should be evaluated and implemented only with your own estate planning counsel. &sect;7520 rates are transcribed from IRS tables and should be independently verified for any month relied upon.
+  </div>
+</main>
+
+<script src="data.js"></script>
+<script src="model.js"></script>
+<script src="desk.js"></script>
+<script>
+(function () {
+  const K = window.DESK, $ = id => document.getElementById(id);
+  K.fillStamp();
+
+  $("idx").textContent = K.index;
+  const w = $("regime-word");
+  w.textContent = K.regime.word; w.classList.add(K.regime.cls);
+  $("regime-expl").textContent = K.regime.expl;
+
+  const pct = K.ddPercentile();
+  $("c-dd").textContent = K.ddNow === null ? "—" : "-" + K.ddNow.toFixed(1) + "%";
+  $("c-dd-note").textContent = pct === null ? "" :
+    "Deeper than " + pct.toFixed(0) + "% of all halving-era days. Deep entries re-price the hurdle from a lower base.";
+  $("c-rate").textContent = K.rateNow.toFixed(1) + "%";
+  $("c-rate-note").textContent = "The IRS discount rate for " + K.fmtDate(K.lastMs).slice(0, 7) +
+    ", reset monthly. Falling rates lower the bar every new GRAT in the chain must clear.";
+  const hurdle = (Math.pow(1 + K.rateNow / 100, 2) - 1) * 100;
+  $("c-hurdle").textContent = "+" + hurdle.toFixed(1) + "%";
+
+  const NAMES = { drawdown: "Drawdown from high (30%)", mvrv_z: "MVRV Z-score (20%)",
+                  mayer: "Mayer Multiple (20%)", realized: "Price vs realized (15%)",
+                  cycle_phase: "Cycle phase (15%)" };
+  const comps = $("components");
+  for (const k in NAMES) {
+    if (!(k in K.sig.components)) continue;
+    const v = K.sig.components[k];
+    comps.insertAdjacentHTML("beforeend",
+      `<div class="combar"><div class="lab"><span>${NAMES[k]}</span><span>${(v * 100).toFixed(0)}</span></div>` +
+      `<div class="track"><div class="fill" style="width:${(v * 100).toFixed(0)}%"></div></div></div>`);
+  }
+
+  const tb = document.querySelector("#analogs tbody");
+  const analogs = K.findAnalogs(3);
+  for (const a of analogs) {
+    const win = a.firstStatus === "completed" && a.firstRemainderPct > 0;
+    tb.insertAdjacentHTML("beforeend",
+      `<tr class="${win ? "win" : "loss"}"><td>${K.fmtDate(a.ms)}</td><td>${a.index}</td>` +
+      `<td>-${a.dd === null ? "—" : a.dd.toFixed(0)}%</td><td>${a.rate.toFixed(1)}%</td>` +
+      `<td>${win ? "remainder passed" : "returned principal"}</td>` +
+      `<td class="mult">${win ? "+" + a.firstRemainderPct.toFixed(0) + "%" : "0% (no cost)"}</td>` +
+      `<td>${a.chainMultiple >= 0.005 ? a.chainMultiple.toFixed(2) + "× (" + a.nGrats + " GRATs)" : "—"}</td></tr>`);
+  }
+
+  const wins = analogs.filter(a => a.firstStatus === "completed" && a.firstRemainderPct > 0).length;
+  $("verdict").innerHTML =
+    `<b>Reading this honestly:</b> today's index of <b>${K.index}</b> (${K.regime.word.toLowerCase()}) ` +
+    `describes entry conditions, not a forecast. Of the three closest historical analogs, ${wins} of 3 first GRATs ` +
+    `passed a remainder; the misses cost nothing but time &mdash; the coins returned and the next link re-priced at the bottom. ` +
+    `That asymmetry &mdash; uncapped upside above the hurdle, principal-back below it &mdash; is the strategy&rsquo;s entire case, ` +
+    `and it holds at every index level. What the index adds is history&rsquo;s answer to &ldquo;how did windows like this one end?&rdquo; ` +
+    `See every seed date on the <a href="vintages.html" style="color:var(--accent)">vintage board</a>, or start from ` +
+    `<a href="index.html" style="color:var(--accent)">the article</a> for the legal architecture.`;
+})();
+</script>
+</body>
+</html>

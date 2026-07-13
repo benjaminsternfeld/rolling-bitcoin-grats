@@ -1,0 +1,104 @@
+/* desk.css — desk-layer components for signal.html / vintages.html.
+   Loads AFTER styles.css and reuses its tokens; adds no new colors beyond them. */
+
+.stampbar {
+  display: flex; flex-wrap: wrap; gap: 0.4rem 1.6rem; align-items: baseline;
+  padding: 0.5rem 1.4rem; border-bottom: 1px solid var(--line);
+  background: var(--panel); font-family: var(--mono); font-size: 0.78rem;
+  color: var(--muted); letter-spacing: 0.03em;
+}
+.stampbar b { color: var(--text); font-weight: 500; }
+.stampbar .up { color: var(--green); }
+.stampbar .down { color: var(--red); }
+
+.desk { max-width: 980px; margin: 0 auto; padding: 2.5rem 1.3rem 4rem; }
+.desk h1 { font-family: var(--serif); font-size: 1.6rem; margin: 0 0 0.2rem; }
+.desk .sub { color: var(--muted); font-size: 0.95rem; margin: 0 0 2rem; }
+
+.hero {
+  display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;
+  padding: 2rem; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 12px; margin-bottom: 1.2rem;
+}
+.hero .idx { font-family: var(--mono); line-height: 1; }
+.hero .idx .n { font-size: clamp(3.4rem, 9vw, 5.2rem); color: var(--accent); font-weight: 600; }
+.hero .idx .of { font-size: 1rem; color: var(--muted); }
+.hero .regime { flex: 1; min-width: 240px; }
+.hero .regime .word {
+  font-family: var(--serif); font-size: clamp(1.7rem, 5vw, 2.6rem);
+  line-height: 1.1; letter-spacing: -0.01em;
+}
+.hero .regime .word.deep { color: var(--green); }
+.hero .regime .word.fav { color: var(--green); }
+.hero .regime .word.neutral { color: var(--gray); }
+.hero .regime .word.ext { color: var(--accent); }
+.hero .regime .word.peak { color: var(--red); }
+.hero .regime .expl { color: var(--muted); font-size: 0.92rem; margin-top: 0.4rem; }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem; margin: 1.2rem 0; }
+.card {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+  padding: 1rem 1.1rem;
+}
+.card h3 {
+  margin: 0 0 0.6rem; font-size: 0.75rem; font-weight: 600; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.08em; font-family: var(--sans);
+}
+.card .big { font-family: var(--mono); font-size: 1.5rem; color: var(--text); }
+.card .note { color: var(--muted); font-size: 0.82rem; margin-top: 0.35rem; line-height: 1.45; }
+
+.combar { margin: 0.45rem 0; }
+.combar .lab {
+  display: flex; justify-content: space-between; font-size: 0.78rem;
+  color: var(--muted); font-family: var(--mono); margin-bottom: 0.2rem;
+}
+.combar .track { height: 6px; background: var(--panel-2); border-radius: 3px; overflow: hidden; }
+.combar .fill { height: 100%; background: var(--accent); border-radius: 3px; }
+
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+table.desk-t { width: 100%; border-collapse: collapse; font-size: 0.85rem; font-family: var(--mono); }
+table.desk-t th {
+  position: sticky; top: 0; background: var(--panel-2); color: var(--muted);
+  text-align: right; font-weight: 600; font-size: 0.72rem; text-transform: uppercase;
+  letter-spacing: 0.06em; padding: 0.55rem 0.8rem; white-space: nowrap;
+  font-family: var(--sans);
+}
+table.desk-t th:first-child, table.desk-t td:first-child { text-align: left; }
+table.desk-t td { text-align: right; padding: 0.45rem 0.8rem; border-top: 1px solid #1d2433; white-space: nowrap; }
+table.desk-t tr.win td { color: #cfe8d6; }
+table.desk-t tr.win td.mult { color: var(--green); }
+table.desk-t tr.loss td.mult { color: var(--red); }
+
+.chip { display: inline-block; padding: 0.05rem 0.5rem; border-radius: 999px; font-size: 0.72rem; font-family: var(--mono); }
+.chip.deep { background: rgba(70,192,104,.15); color: var(--green); }
+.chip.mid { background: rgba(247,147,26,.14); color: var(--accent); }
+.chip.shallow { background: rgba(124,135,153,.18); color: var(--gray); }
+
+.seg.era { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin: 0 0 0.8rem; }
+.seg.era button {
+  background: var(--panel); border: 0; color: var(--muted); padding: 0.4rem 0.9rem;
+  font-size: 0.8rem; cursor: pointer; font-family: var(--sans);
+}
+.seg.era button.on { background: var(--panel-2); color: var(--text); }
+
+.verdict {
+  border-left: 3px solid var(--accent); background: var(--panel);
+  border-radius: 0 12px 12px 0; padding: 1rem 1.2rem; margin: 1.4rem 0;
+  font-size: 0.95rem; line-height: 1.6;
+}
+.verdict b { color: var(--accent); }
+
+.disclaimer {
+  border: 1px solid var(--line); border-radius: 12px; padding: 0.9rem 1.1rem;
+  color: var(--muted); font-size: 0.8rem; line-height: 1.55; margin-top: 2.2rem;
+}
+.method { color: var(--muted); font-size: 0.88rem; line-height: 1.6; margin-top: 2rem; }
+.method h2 { font-family: var(--serif); color: var(--text); font-size: 1.2rem; margin: 0 0 0.5rem; }
+.method code { font-family: var(--mono); font-size: 0.82rem; color: var(--text); }
+
+.progress { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); margin: 0.6rem 0; }
+
+@media (max-width: 640px) {
+  .stampbar { gap: 0.3rem 1rem; font-size: 0.7rem; padding: 0.45rem 0.9rem; }
+  .hero { padding: 1.3rem; gap: 1.2rem; }
+}
